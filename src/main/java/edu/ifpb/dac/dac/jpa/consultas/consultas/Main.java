@@ -30,14 +30,14 @@ public class Main {
 //        entityManager.persist(em);
 //        et.commit();
         //Consulta 15
-        Query query1 = entityManager.createQuery("SELECT e.nome FROM Empregado e JOIN e.dependentes d WHERE UPPER(d.nome) LIKE '%_A%'", String.class);
-        List<String> lista = query1.getResultList();
-        lista.forEach(x -> System.out.println("Consulta 1: " + x));
+        Query query1 = entityManager.createQuery("SELECT e FROM Empregado e JOIN e.dependentes d WHERE UPPER(d.nome) LIKE '%_A%'", Empregado.class);
+        List<Empregado> listaEmpregaado = query1.getResultList();
+        listaEmpregaado.forEach(x -> System.out.println("Consulta 1: " + x));
 
         //Consulta 16
         Query query2 = entityManager.createQuery("SELECT UPPER(e.nome) FROM Empregado e JOIN e.dependentes d", String.class);
-        lista = query2.getResultList();
-        lista.forEach(x -> System.out.println("Consulta 2: " + x));
+        List<String> listaString = query2.getResultList();
+        listaString.forEach(x -> System.out.println("Consulta 2: " + x));
 
         //Consulta 17
         Query query3 = entityManager.createQuery("SELECT COUNT(e) quantidade FROM Empregado e", Long.class);
@@ -45,9 +45,9 @@ public class Main {
         System.out.println("Consulta 3: " + quant);
 
         //Consulta 18
-        Query query4 = entityManager.createQuery("SELECT e.nome FROM Empregado e ORDER BY e.nome ASC", Empregado.class);
-        lista = query4.getResultList();
-        lista.forEach(x -> System.out.println("Consulta 4: " + x));
+        Query query4 = entityManager.createQuery("SELECT e FROM Empregado e ORDER BY e.nome ASC", Empregado.class);
+        listaEmpregaado = query4.getResultList();
+        listaEmpregaado.forEach(x -> System.out.println("Consulta 4: " + x));
 
         //Consulta 19
         Query query5 = entityManager.createQuery("SELECT e.nome,COUNT(d) quant_dep FROM Empregado e LEFT JOIN e.dependentes d GROUP BY e.nome");
@@ -56,18 +56,18 @@ public class Main {
         
         //Consulta 20
         Query query6=entityManager.createQuery("SELECT e.nome FROM Empregado e WHERE e.id>(SELECT AVG(e1.id) media FROM Empregado e1)");
-        lista=query6.getResultList();
-        lista.forEach(x->System.out.println("Consulta 6: "+x));
+        listaString=query6.getResultList();
+        listaString.forEach(x->System.out.println("Consulta 6: "+x));
         
         //Consulta 21
-        Query query7=entityManager.createQuery("SELECT e.nome FROM Empregado e JOIN e.dependentes d WHERE d.id>2");
-        lista=query7.getResultList();
-        lista.forEach(x->System.out.println("Consulta 7: "+x));
+        Query query7=entityManager.createQuery("SELECT e FROM Empregado e JOIN e.dependentes d WHERE d.id>2");
+        listaEmpregaado=query7.getResultList();
+        listaEmpregaado.forEach(x->System.out.println("Consulta 7: "+x));
         
         //Consulta 23
-        Query query8=entityManager.createQuery("SELECT e.nome FROM Empregado e WHERE e.nome<>:nome");
-        lista=query8.setParameter("nome", "Emanuel").getResultList();
-        lista.forEach(x->System.out.println("Consulta 8: "+x));
+        Query query8=entityManager.createQuery("SELECT e FROM Empregado e WHERE e.nome<>:nome");
+        listaEmpregaado=query8.setParameter("nome", "Emanuel").getResultList();
+        listaEmpregaado.forEach(x->System.out.println("Consulta 8: "+x));
         
     }
 

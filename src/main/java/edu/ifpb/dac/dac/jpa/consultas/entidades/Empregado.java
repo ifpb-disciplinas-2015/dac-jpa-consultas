@@ -87,6 +87,13 @@ public class Empregado implements Serializable {
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
+
+    @Override
+    public String toString() {
+        return "Empregado{" + "id=" + id + ", nome=" + nome + ", dependentes=" + dependentes + ", faculdade=" + faculdade + ", projetos=" + projetos + ", endereco=" + endereco + '}';
+    }
+    
+    
     
     
     
